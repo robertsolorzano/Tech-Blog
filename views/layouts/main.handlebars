@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech Blog</title>
+  <link rel="stylesheet" href="">
+</head>
+<body>
+  <header>
+    <h1>Tech Blog</h1>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        {{#if logged_in}}
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="#" id="logout">Logout</a></li>
+        {{else}}
+        <li><a href="/login">Login</a></li>
+        <li><a href="/signup">Sign Up</a></li>
+        {{/if}}
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    {{{body}}}
+  </main>
+
+  <footer>
+    <p>Tech-Blog 2024</p>
+  </footer>
+
+  {{#if logged_in}}
+  <script src=""></script>
+  {{/if}}
+</body>
+</html>
+
+
+

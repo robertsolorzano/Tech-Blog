@@ -1,0 +1,19 @@
+<section class="hero">
+  <h2>Welcome to Tech Blog</h2>
+  <p>Discover the latest tech news, insights, and discussions.</p>
+</section>
+
+<section class="post-list">
+  {{#each posts}}
+  <article class="post">
+    <h3><a href="/post/{{id}}">{{title}}</a></h3>
+    <p>Posted by {{user.username}} on {{created_at}}</p>
+    <p>{{content}}</p>
+  </article>
+  {{/each}}
+</section>
+
+
+
+
+
