@@ -2,7 +2,7 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: monospace, Arial, sans-serif;
     background-color: #f2f2f2;
     color: #333;
     display: flex;
@@ -46,4 +46,51 @@ footer {
     text-align: center;
     padding: 10px 0;
     margin-top: auto;
+}
+
+/* homepage */
+.hero {
+    background-color: #f0f0f0;
+    padding: 50px;
+    text-align: center;
+}
+
+.hero h2 {
+    color: #333;
+    font-size: 2.5em;
+}
+
+.hero p {
+    color: #666;
+    font-size: 1.2em;
+}
+
+/* Styles for the post list section */
+.post-list {
+    margin-top: 30px;
+}
+
+.post {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.post h3 {
+    color: #333;
+    font-size: 1.8em;
+    margin-top: 0;
+}
+
+.post p {
+    color: #666;
+    font-size: 1em;
+}
+
+.post a {
+    text-decoration: none;
+    color: #007bff;
+    /* Blue color for links */
 }
