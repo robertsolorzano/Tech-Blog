@@ -15,8 +15,7 @@
         <li><a href="/dashboard">Dashboard</a></li>
         <li><a href="#" id="logout">Logout</a></li>
         {{else}}
-        <li><a href="/login">Login</a></li>
-        <li><a href="/signup">Sign Up</a></li>
+        <li><a href="/login">Login/Sign Up</a></li>
         {{/if}}
       </ul>
     </nav>
@@ -31,10 +30,9 @@
   </footer>
 
   {{#if logged_in}}
-  <script src=""></script>
+  <script src="/js/logout.js"></script>
+  {{else}}
+  <script src="/js/login.js"></script>
   {{/if}}
 </body>
 </html>
-
-
-
