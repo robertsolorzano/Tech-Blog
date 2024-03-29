@@ -32,15 +32,6 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
-// Signup page route
-router.get('/signup', (req, res) => {
-  if (req.session.logged_in) {
-    res.redirect('/dashboard');
-    return;
-  }
-  res.render('signup');
-});
-
 // Single post page route
 router.get('/post/:id', async (req, res) => {
   try {
