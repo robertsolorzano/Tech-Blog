@@ -1,7 +1,10 @@
-<div class="post">
+<div class="post" data-post-id="{{id}}">
   <h3>{{title}}</h3>
   <p>{{content}}</p>
   <p>Created by {{user.username}} on {{format_date createdAt}}</p>
+
+  <button class="edit-post-btn" data-post-id="{{id}}">Edit</button>
+  <button class="delete-post-btn" data-post-id="{{id}}">Delete</button>
 
   <form class="edit-post-form" style="display: none;" data-post-id="{{id}}">
     <div>
@@ -15,7 +18,4 @@
     <button type="submit" class="save-edit-btn">Save</button>
     <button type="button" class="cancel-edit-btn">Cancel</button>
   </form>
-
-  <button class="edit-post-btn">Edit</button>
-  <button class="delete-post-btn" data-post-id="{{id}}">Delete</button>
 </div>
