@@ -18,4 +18,18 @@
     <button type="submit" class="save-edit-btn">Save</button>
     <button type="button" class="cancel-edit-btn">Cancel</button>
   </form>
+
+  <!-- Comments section -->
+  <h4>Comments</h4>
+  <div class="comment-list" data-post-id="{{id}}">
+    {{#each comments as |comment|}}
+      {{> comment comment=comment isCurrentUser=../isCurrentUser}}
+    {{/each}}
+  </div>
+
+  <!-- Add comment form -->
+  <form class="add-comment-form" data-post-id="{{id}}">
+    <textarea id="comment-text" placeholder="Add a comment..."></textarea>
+    <button type="submit" data-post-id="{{id}}">Submit</button>
+  </form>
 </div>

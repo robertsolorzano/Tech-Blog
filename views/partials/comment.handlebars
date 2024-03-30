@@ -1,0 +1,19 @@
+<!-- partials/comment.handlebars -->
+<div class="comment" data-comment-id="{{id}}">
+  <p>{{content}}</p>
+  <p>Posted by {{user.username}} on {{format_date createdAt}}</p>
+
+  {{#if isCurrentUser}}
+    <button class="edit-comment-btn" data-comment-id="{{id}}">Edit</button>
+    <button class="delete-comment-btn" data-comment-id="{{id}}">Delete</button>
+  {{/if}}
+
+  <form class="edit-comment-form" style="display: none;" data-comment-id="{{id}}">
+    <div>
+      <label for="edit-comment-text">Edit Comment:</label>
+      <textarea id="edit-comment-text" name="edit-comment-text" required>{{content}}</textarea>
+    </div>
+    <button type="submit" class="save-edit-comment-btn">Save</button>
+    <button type="button" class="cancel-edit-comment-btn">Cancel</button>
+  </form>
+</div>
