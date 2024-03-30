@@ -52,6 +52,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Fetch comments for each post when the page loads
+  addCommentForms.forEach(form => {
+    const postId = form.dataset.postId;
+    fetchComments(postId);
+  });
+
+
+  // Delete comment
+  async function deleteComment(commentId, postId) {
+    try {
+      const response = await fetch(`/api/comments/${commentId}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        console.log('Comment deleted successfully');
+        fetchComments(postId);
+      } else {
+        console.error('Failed to delete comment');
+      }
+    } catch (error) {
+      console.error('Error deleting comment:', error);
+    }
+  }
+
   // Update the comment UI with the fetched comments
   function updateCommentUI(postId, comments) {
     const commentList = document.querySelector(`.comment-list[data-post-id="${postId}"]`);
@@ -64,14 +89,21 @@ document.addEventListener('DOMContentLoaded', () => {
         <p>${comment.content}</p>
         <p>Posted by: ${comment.user.username}</p>
         <p>Posted on: ${new Date(comment.createdAt).toLocaleString()}</p>
+        <button class="delete-comment-btn" data-comment-id="${comment.id}" data-post-id="${postId}">Delete</button>
       `;
       commentList.appendChild(commentItem);
     });
+
+    // Delete comment buttons
+    const deleteCommentBtns = document.querySelectorAll('.delete-comment-btn');
+    deleteCommentBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const commentId = btn.dataset.commentId;
+        const postId = btn.dataset.postId;
+        deleteComment(commentId, postId);
+      });
+    });
   }
 
-  // Fetch comments for each post when the page loads
-  addCommentForms.forEach(form => {
-    const postId = form.dataset.postId;
-    fetchComments(postId);
-  });
+  
 });
