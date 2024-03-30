@@ -1,14 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
   const addCommentForms = document.querySelectorAll('.add-comment-form');
 
+  // Fetch comments for each post when the page loads
+  addCommentForms.forEach(form => {
+    const postId = form.dataset.postId;
+    fetchComments(postId);
+  });
+
+  // Create comment
   addCommentForms.forEach(form => {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-
       const postId = form.dataset.postId;
       const content = form.querySelector('textarea').value;
-      console.log('Post ID:', postId); 
-      
+      console.log('Post ID:', postId);
       try {
         const response = await fetch('/api/comments', {
           method: 'POST',
@@ -20,7 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
             'Content-Type': 'application/json',
           },
         });
-
         if (response.ok) {
           form.querySelector('textarea').value = '';
           console.log('Comment added successfully');
@@ -37,6 +41,28 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // Edit & Delete click event delegation
+  document.addEventListener('click', async (event) => {
+    if (event.target.classList.contains('edit-comment-btn')) {
+      const commentId = event.target.dataset.commentId;
+      const editForm = document.querySelector(`.edit-comment-form[data-comment-id="${commentId}"]`);
+      editForm.style.display = 'block';
+    } else if (event.target.classList.contains('delete-comment-btn')) {
+      const commentId = event.target.dataset.commentId;
+      const postId = event.target.dataset.postId;
+      await deleteComment(commentId, postId);
+    } else if (event.target.classList.contains('save-edit-comment-btn')) {
+      event.preventDefault();
+      const commentId = event.target.closest('.edit-comment-form').dataset.commentId;
+      const postId = event.target.closest('.comment-item').querySelector('.edit-comment-btn').dataset.postId;
+      const content = document.getElementById(`edit-comment-text-${commentId}`).value;
+      await editComment(commentId, postId, content);
+    } else if (event.target.classList.contains('cancel-edit-comment-btn')) {
+      const editForm = event.target.closest('.edit-comment-form');
+      editForm.style.display = 'none';
+    }
+  });
+
   // Fetch comments for a specific post
   async function fetchComments(postId) {
     try {
@@ -51,13 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error('Error fetching comments:', error);
     }
   }
-
-  // Fetch comments for each post when the page loads
-  addCommentForms.forEach(form => {
-    const postId = form.dataset.postId;
-    fetchComments(postId);
-  });
-
 
   // Delete comment
   async function deleteComment(commentId, postId) {
@@ -77,6 +96,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Edit comment
+  async function editComment(commentId, postId, content) {
+    try {
+      const response = await fetch(`/api/comments/${commentId}`, {
+        method: 'PUT',
+        body: JSON.stringify({ content }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.ok) {
+        console.log('Comment updated successfully');
+        fetchComments(postId);
+      } else {
+        console.error('Failed to update comment');
+      }
+    } catch (error) {
+      console.error('Error updating comment:', error);
+    }
+  }
+
   // Update the comment UI with the fetched comments
   function updateCommentUI(postId, comments) {
     const commentList = document.querySelector(`.comment-list[data-post-id="${postId}"]`);
@@ -89,21 +130,18 @@ document.addEventListener('DOMContentLoaded', () => {
         <p>${comment.content}</p>
         <p>Posted by: ${comment.user.username}</p>
         <p>Posted on: ${new Date(comment.createdAt).toLocaleString()}</p>
+        <button class="edit-comment-btn" data-comment-id="${comment.id}" data-post-id="${postId}">Edit</button>
         <button class="delete-comment-btn" data-comment-id="${comment.id}" data-post-id="${postId}">Delete</button>
+        <form class="edit-comment-form" style="display: none;" data-comment-id="${comment.id}">
+          <div>
+            <label for="edit-comment-text-${comment.id}">Edit Comment:</label>
+            <textarea id="edit-comment-text-${comment.id}" name="edit-comment-text" required>${comment.content}</textarea>
+          </div>
+          <button type="submit" class="save-edit-comment-btn">Save</button>
+          <button type="button" class="cancel-edit-comment-btn">Cancel</button>
+        </form>
       `;
       commentList.appendChild(commentItem);
     });
-
-    // Delete comment buttons
-    const deleteCommentBtns = document.querySelectorAll('.delete-comment-btn');
-    deleteCommentBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const commentId = btn.dataset.commentId;
-        const postId = btn.dataset.postId;
-        deleteComment(commentId, postId);
-      });
-    });
   }
-
-  
 });

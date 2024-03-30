@@ -45,6 +45,32 @@ router.get('/', async (req, res) => {
   }
 });
 
+
+// Update comment
+router.put('/:id', withAuth, async (req, res) => {
+  try {
+    const updatedComment = await Comment.update(
+      {
+        content: req.body.content,
+      },
+      {
+        where: {
+          id: req.params.id,
+          user_id: req.session.user_id,
+        },
+      }
+    );
+    if (!updatedComment[0]) {
+      res.status(404).json({ message: 'No comment found with this id' });
+      return;
+    }
+    res.status(200).json({ message: 'Comment updated successfully' });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
 // Delete comment
 router.delete('/:id', withAuth, async (req, res) => {
   try {
