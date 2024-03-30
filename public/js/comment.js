@@ -53,13 +53,18 @@ document.addEventListener('DOMContentLoaded', () => {
       await deleteComment(commentId, postId);
     } else if (event.target.classList.contains('save-edit-comment-btn')) {
       event.preventDefault();
-      const commentId = event.target.closest('.edit-comment-form').dataset.commentId;
-      const postId = event.target.closest('.comment-item').querySelector('.edit-comment-btn').dataset.postId;
-      const content = document.getElementById(`edit-comment-text-${commentId}`).value;
-      await editComment(commentId, postId, content);
+      const editCommentForm = event.target.closest('.edit-comment-form');
+      if (editCommentForm) {
+        const commentId = editCommentForm.dataset.commentId;
+        const postId = editCommentForm.closest('.comment-item').querySelector('.edit-comment-btn').dataset.postId;
+        const content = editCommentForm.querySelector('textarea').value;
+        await editComment(commentId, postId, content);
+      }
     } else if (event.target.classList.contains('cancel-edit-comment-btn')) {
       const editForm = event.target.closest('.edit-comment-form');
-      editForm.style.display = 'none';
+      if (editForm) {
+        editForm.style.display = 'none';
+      }
     }
   });
 
