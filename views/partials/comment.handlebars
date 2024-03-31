@@ -1,6 +1,6 @@
 <div class="comment" data-comment-id="{{id}}">
-  <p class="post-content">{{content}}</p>
   <p class="post-time">@{{user.username}} {{format_date createdAt}}</p>
+  <p class="post-content">{{content}}</p>
 
   {{#if isCurrentUser}}
     <button class="edit-comment-btn" data-comment-id="{{id}}">Edit</button>

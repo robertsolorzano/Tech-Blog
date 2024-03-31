@@ -1,10 +1,16 @@
 <div class="post" data-post-id="{{id}}">
-  <h3>{{title}}</h3>
+  <div class="post-header">
+    <h3>{{title}}</h3>
+    <div class="dropdown">
+      <i class="fas fa-ellipsis-v"></i>
+      <div class="dropdown-content">
+        <button class="edit-post-btn" data-post-id="{{id}}">Edit</button>
+        <button class="delete-post-btn" data-post-id="{{id}}">Delete</button>
+      </div>
+    </div>
+  </div>
+    <p class="post-time">@{{user.username}} {{format_date createdAt}}</p>
   <p class="post-content">{{content}}</p>
-  <p class="post-time">@{{post.user.username}} {{format_date createdAt}}</p>
-
-  <button class="edit-post-btn" data-post-id="{{id}}">Edit</button>
-  <button class="delete-post-btn" data-post-id="{{id}}">Delete</button>
 
   <form class="edit-post-form" style="display: none;" data-post-id="{{id}}">
     <div>
@@ -20,7 +26,6 @@
   </form>
 
   <!-- Comments section -->
-  <h4>Comments</h4>
   <div class="comment-list" data-post-id="{{id}}">
     {{#each comments as |comment|}}
       {{> comment comment=comment isCurrentUser=../isCurrentUser}}

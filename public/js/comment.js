@@ -123,29 +123,37 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Update the comment UI with the fetched comments
-  function updateCommentUI(postId, comments) {
-    const commentList = document.querySelector(`.comment-list[data-post-id="${postId}"]`);
-    commentList.innerHTML = '';
+// Update the comment UI with the fetched comments
+function updateCommentUI(postId, comments) {
+  const commentList = document.querySelector(`.comment-list[data-post-id="${postId}"]`);
+  commentList.innerHTML = '';
 
-    comments.forEach(comment => {
-      const commentItem = document.createElement('div');
-      commentItem.classList.add('comment-item');
-      commentItem.innerHTML = `
+  comments.forEach(comment => {
+    const commentItem = document.createElement('div');
+    commentItem.classList.add('comment-item');
+    commentItem.innerHTML = `
+    <p class="comment-time">@${comment.user.username} ${new Date(comment.createdAt).toLocaleString()}</p>
+      <div class="comment-header">
         <p class="comment-content">${comment.content}</p>
-        <p class="comment-time">@${comment.user.username} ${new Date(comment.createdAt).toLocaleString()}</p>
-        <button class="edit-comment-btn" data-comment-id="${comment.id}" data-post-id="${postId}">Edit</button>
-        <button class="delete-comment-btn" data-comment-id="${comment.id}" data-post-id="${postId}">Delete</button>
-        <form class="edit-comment-form" style="display: none;" data-comment-id="${comment.id}">
-          <div>
-            <label for="edit-comment-text-${comment.id}">Edit Comment:</label>
-            <textarea id="edit-comment-text-${comment.id}" name="edit-comment-text" required>${comment.content}</textarea>
+        <div class="dropdown">
+          <i class="fas fa-ellipsis-v"></i>
+          <div class="dropdown-content">
+            <button class="edit-comment-btn" data-comment-id="${comment.id}" data-post-id="${postId}">Edit</button>
+            <button class="delete-comment-btn" data-comment-id="${comment.id}" data-post-id="${postId}">Delete</button>
           </div>
-          <button type="submit" class="save-edit-comment-btn">Save</button>
-          <button type="button" class="cancel-edit-comment-btn">Cancel</button>
-        </form>
-      `;
-      commentList.appendChild(commentItem);
-    });
-  }
+        </div>
+      </div>
+      <form class="edit-comment-form" style="display: none;" data-comment-id="${comment.id}">
+        <div>
+          <label for="edit-comment-text-${comment.id}">Edit Comment:</label>
+          <textarea id="edit-comment-text-${comment.id}" name="edit-comment-text" required>${comment.content}</textarea>
+        </div>
+        <button type="submit" class="save-edit-comment-btn">Save</button>
+        <button type="button" class="cancel-edit-comment-btn">Cancel</button>
+      </form>
+    `;
+
+    commentList.appendChild(commentItem);
+  });
+}
 });
