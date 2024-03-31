@@ -132,9 +132,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const commentItem = document.createElement('div');
       commentItem.classList.add('comment-item');
       commentItem.innerHTML = `
-        <p>${comment.content}</p>
-        <p>Posted by: ${comment.user.username}</p>
-        <p>Posted on: ${new Date(comment.createdAt).toLocaleString()}</p>
+        <p class="comment-content">${comment.content}</p>
+        <p class="comment-time">@${comment.user.username} ${new Date(comment.createdAt).toLocaleString()}</p>
         <button class="edit-comment-btn" data-comment-id="${comment.id}" data-post-id="${postId}">Edit</button>
         <button class="delete-comment-btn" data-comment-id="${comment.id}" data-post-id="${postId}">Delete</button>
         <form class="edit-comment-form" style="display: none;" data-comment-id="${comment.id}">

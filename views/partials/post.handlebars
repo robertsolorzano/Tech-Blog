@@ -1,7 +1,7 @@
 <div class="post" data-post-id="{{id}}">
   <h3>{{title}}</h3>
-  <p>{{content}}</p>
-  <p>Created by {{user.username}} on {{format_date createdAt}}</p>
+  <p class="post-content">{{content}}</p>
+  <p class="post-time">@{{post.user.username}} {{format_date createdAt}}</p>
 
   <button class="edit-post-btn" data-post-id="{{id}}">Edit</button>
   <button class="delete-post-btn" data-post-id="{{id}}">Delete</button>

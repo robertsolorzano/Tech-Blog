@@ -4,16 +4,11 @@
 </section>
 
 <section class="post-list">
-  {{#each posts}}
-  <article class="post">
-    <h3><a href="/post/{{id}}">{{title}}</a></h3>
-    <p>Posted by {{user.username}} on {{format_date createdAt}}</p>
-    <p>{{content}}</p>
-  </article>
+  {{#each posts as |post|}}
+    <article class="post">
+      <h3><a href="/post/{{post.id}}">{{post.title}}</a></h3>
+      <p class="post-content">{{post.content}}</p>
+      <p class="post-time">@{{post.user.username}} {{format_date post.createdAt}}</p>
+    </article>
   {{/each}}
 </section>
-
-
-
-
-
