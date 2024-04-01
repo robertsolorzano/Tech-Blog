@@ -38,7 +38,7 @@ postContainer.addEventListener('click', async (event) => {
     postTitle.contentEditable = true;
     postContent.contentEditable = true;
     
-    postTitle.focus();
+    postContent.focus();
   
     event.target.textContent = 'Save';
     event.target.classList.add('save-edit-btn');
