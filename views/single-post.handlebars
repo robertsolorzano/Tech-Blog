@@ -1,8 +1,8 @@
 <section class="single-post">
   <article class="post">
-    <h2>{{post.title}}</h2>
+    <h2 class="s-post-title">{{post.title}}</h2>
     <p class="s-post-content">{{post.content}}</p>
-    <p class="s-post-time">@{{post.user.username}} {{format_date post.createdAt}}</p>
+    <p class="s-post-time">@{{post.user.username}} • <small>{{format_date post.createdAt}}</small></p>
   </article>
 
   <section class="comments">

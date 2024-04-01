@@ -129,12 +129,13 @@ function updateCommentUI(postId, comments) {
   commentList.innerHTML = '';
 
   comments.forEach(comment => {
+    const relativeTime = moment(comment.createdAt).fromNow();
     const commentItem = document.createElement('div');
     commentItem.classList.add('comment-item');
     commentItem.innerHTML = `
-    <p class="comment-time">@${comment.user.username} ${new Date(comment.createdAt).toLocaleString()}</p>
       <div class="comment-header">
-        <p class="comment-content">${comment.content}</p>
+      <p class="comment-content"> <span class="username-color">@${comment.user.username}:</span> ${comment.content} <small class="comment-time"> • ${relativeTime} </small></p>
+
         <div class="dropdown">
           <i class="fas fa-ellipsis-v"></i>
           <div class="dropdown-content">

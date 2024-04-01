@@ -78,13 +78,6 @@ footer {
     margin-bottom: 20px;
 }
 
-.post h2,
-h3,
-h4 {
-    color: #ffffff;
-    font-size: 1em;
-    margin-top: 0;
-}
 
 .post a {
     text-decoration: none;
@@ -103,6 +96,7 @@ h4 {
     font-size: 1em;
     color: #ffffff;
     font-size: .9em;
+    margin-top: 0;
 }
 
 .comments {
@@ -413,4 +407,10 @@ h1 {
 .single-post {
     width: 60%;
     margin: 30px auto;
+}
+
+.s-post-title, .post-title {
+    font-size: 22px;
+    margin-top: 0;
+    color: #ffffff;;
 }
