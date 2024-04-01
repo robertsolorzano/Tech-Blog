@@ -28,43 +28,28 @@ createPostForm.addEventListener('submit', async (event) => {
   }
 });
 
-// Edit/Delete 
+// Edit inline/Save/Delete 
 postContainer.addEventListener('click', async (event) => {
   if (event.target.classList.contains('edit-post-btn')) {
     const postId = event.target.dataset.postId;
-    const editForm = document.querySelector(`.edit-post-form[data-post-id="${postId}"]`);
-    editForm.style.display = 'block';
-
-    const response = await fetch(`/api/posts/${postId}`);
-    const post = await response.json();
-
-    const titleInput = editForm.querySelector('#edit-post-title');
-    const contentInput = editForm.querySelector('#edit-post-content');
-    titleInput.value = post.title;
-    contentInput.value = post.content;
-  } else if (event.target.classList.contains('delete-post-btn')) {
+    const postTitle = document.querySelector(`.post-title[data-post-id="${postId}"]`);
+    const postContent = document.querySelector(`.post-content[data-post-id="${postId}"]`);
+    
+    postTitle.contentEditable = true;
+    postContent.contentEditable = true;
+    
+    postTitle.focus();
+  
+    event.target.textContent = 'Save';
+    event.target.classList.add('save-edit-btn');
+    event.target.classList.remove('edit-post-btn');
+  } else if (event.target.classList.contains('save-edit-btn')) {
     const postId = event.target.dataset.postId;
+    const postTitle = document.querySelector(`.post-title[data-post-id="${postId}"]`);
+    const postContent = document.querySelector(`.post-content[data-post-id="${postId}"]`);
 
-    const response = await fetch(`/api/posts/${postId}`, {
-      method: 'DELETE',
-    });
-
-    if (response.ok) {
-      const postEl = document.querySelector(`.post[data-post-id="${postId}"]`);
-      postEl.remove();
-    } else {
-      alert('Failed to delete post');
-    }
-  }
-});
-
-// Save edit 
-editPostForms.forEach((form) => {
-  form.addEventListener('submit', async (event) => {
-    event.preventDefault();
-    const postId = event.target.getAttribute('data-post-id');
-    const title = event.target.querySelector('#edit-post-title').value.trim();
-    const content = event.target.querySelector('#edit-post-content').value.trim();
+    const title = postTitle.textContent.trim();
+    const content = postContent.textContent.trim();
 
     const response = await fetch(`/api/posts/${postId}`, {
       method: 'PUT',
@@ -73,14 +58,27 @@ editPostForms.forEach((form) => {
     });
 
     if (response.ok) {
-      const postEl = event.target.closest('.post');
-      postEl.querySelector('h3').textContent = title;
-      postEl.querySelector('p:nth-child(2)').textContent = content;
-      form.style.display = 'none';
+      postTitle.contentEditable = false;
+      postContent.contentEditable = false;
+      event.target.textContent = 'Edit';
+      event.target.classList.remove('save-edit-btn');
+      event.target.classList.add('edit-post-btn');
     } else {
       alert('Failed to update post');
     }
-  });
+  } else if (event.target.classList.contains('delete-post-btn')) {
+    const postId = event.target.dataset.postId;
+
+    const response = await fetch(`/api/posts/${postId}`, {
+      method: 'DELETE',
+    });
+    if (response.ok) {
+      const postEl = document.querySelector(`.post[data-post-id="${postId}"]`);
+      postEl.remove();
+    } else {
+      alert('Failed to delete post');
+    }
+  }
 });
 
 // Cancel edit

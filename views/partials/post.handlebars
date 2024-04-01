@@ -1,6 +1,6 @@
 <div class="post" data-post-id="{{id}}">
   <div class="post-header">
-    <h3 class="post-title">{{title}}</h3>
+    <h3 class="post-title" data-post-id="{{id}}">{{title}}</h3>
     <div class="dropdown">
       <i class="fas fa-ellipsis-v"></i>
       <div class="dropdown-content">
@@ -9,25 +9,13 @@
       </div>
     </div>
   </div>
-    <p class="post-content">@{{user.username}}: {{content}} <small class="post-time"> • {{format_date createdAt}}</small></p>
-
-  <form class="edit-post-form" style="display: none;" data-post-id="{{id}}">
-    <div>
-      <label for="edit-post-title">Title:</label>
-      <input type="text" id="edit-post-title" name="edit-post-title" value="{{title}}" required>
-    </div>
-    <div>
-      <label for="edit-post-content">Content:</label>
-      <textarea id="edit-post-content" name="edit-post-content" required>{{content}}</textarea>
-    </div>
-    <button type="submit" class="save-edit-btn">Save</button>
-    <button type="button" class="cancel-edit-btn">Cancel</button>
-  </form>
+  <p class="post-content" data-post-id="{{id}}" contenteditable="false">{{content}}</p>
+  <small class="post-time">@{{user.username}} • {{format_date createdAt}}</small>
 
   <!-- Comments section -->
   <div class="comment-list" data-post-id="{{id}}">
     {{#each comments as |comment|}}
-      {{> comment comment=comment isCurrentUser=../isCurrentUser}}
+    {{> comment comment=comment isCurrentUser=../isCurrentUser}}
     {{/each}}
   </div>
 

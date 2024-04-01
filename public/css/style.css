@@ -91,6 +91,11 @@ footer {
 }
 
 .post-content,
+.s-post-content {
+    white-space: pre-wrap;
+}
+
+.post-content,
 .s-post-content,
 .comment-content {
     font-size: 1em;
@@ -278,7 +283,7 @@ h1 {
 }
 
 .edit-post-form button:hover {
-    background-color:  #888888;
+    background-color: #888888;
 }
 
 .comment-list {
@@ -389,18 +394,20 @@ h1 {
     background-color: #ddd;
 }
 
-.save-edit-comment-btn, .cancel-edit-comment-btn {
+.save-edit-comment-btn,
+.cancel-edit-comment-btn {
     background-color: #747474;
     color: #000;
     border: none;
     padding: 5px 10px;
     border-radius: 3px;
     cursor: pointer;
-    margin-right: 10px; 
+    margin-right: 10px;
 }
 
-.save-edit-comment-btn:hover, .cancel-edit-comment-btn:hover {
-    background-color:  #888888;
+.save-edit-comment-btn:hover,
+.cancel-edit-comment-btn:hover {
+    background-color: #888888;
 }
 
 /*Single-post view */
@@ -409,8 +416,10 @@ h1 {
     margin: 30px auto;
 }
 
-.s-post-title, .post-title {
+.s-post-title,
+.post-title {
     font-size: 22px;
     margin-top: 0;
-    color: #ffffff;;
+    color: #ffffff;
+    ;
 }
