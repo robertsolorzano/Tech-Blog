@@ -6,8 +6,8 @@
 <section class="post-list">
   {{#each posts as |post|}}
     <article class="post">
-      <h3><a href="/post/{{post.id}}">{{post.title}}</a></h3>
-      <p class="post-content">{{post.content}}</p>
+      <h3 class="post-title"><a class="post-title-link" href="/post/{{post.id}}">{{post.title}}</a></h3>
+      <p class="post-content">{{truncate post.content 750}}<a class="read-more" href="/post/{{post.id}}">Read More</a></p>
       <p class="post-time">@{{post.user.username}} • <small>{{format_date post.createdAt}}</small></p>
     </article>
   {{/each}}
