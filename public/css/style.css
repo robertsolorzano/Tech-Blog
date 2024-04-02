@@ -427,12 +427,17 @@ h1 {
     color: #ffffff;
 }
 
-.read-more {
+.read-more, .login-post-link {
     color: #00bd00;
     text-decoration: none;
 }
 
-.read-more:hover {
+.read-more:hover,
+.login-post-link:hover {
     text-decoration: underline;
     color: #00db00;
+}
+
+.login-message {
+    color: #444
 }
