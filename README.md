@@ -26,7 +26,7 @@ Tech Blog is a user-friendly website that allows technology enthusiasts to publi
 1. Clone the Repository
 
 ```bash
-git clone https://your-repository-url/tech-blog.git
+git clone git@github.com:robertsolorzano/Tech-Blog.git
 ```
 
 2. Install Dependencies
