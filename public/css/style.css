@@ -71,9 +71,22 @@ footer {
 
 .post-list {
     margin-top: 30px;
-    max-width: 45%;
+    max-width: 20%;
     margin: 30px auto;
 }
+
+@media only screen and (max-width: 1200px) {
+    .post-list {
+        max-width: 100%;
+    }
+}
+
+@media only screen and (min-width: 1201px) {
+    .post-list {
+        min-width: 960px;
+    }
+}
+
 
 .post {
     background-color: #444;
@@ -411,10 +424,21 @@ h1 {
 
 /*Single-post view */
 .single-post {
-    width: 60%;
+    width: 35%;
     margin: 30px auto;
 }
 
+@media only screen and (max-width: 1200px) {
+    .single-post {
+        max-width: 100%;
+    }
+}
+
+@media only screen and (min-width: 1201px) {
+    .single-post {
+        min-width: 960px;
+    }
+}
 .s-post-title,
 .post-title {
     font-size: 22px;
@@ -427,7 +451,8 @@ h1 {
     color: #ffffff;
 }
 
-.read-more, .login-post-link {
+.read-more,
+.login-post-link {
     color: #00bd00;
     text-decoration: none;
 }
