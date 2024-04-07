@@ -4,6 +4,8 @@
 
 Tech Blog is a user-friendly website that allows technology enthusiasts to publish, discuss, and interact with content related to tech topics. It provides features like user accounts, posting capabilities, and commenting functionality, all within a clean and responsive design.
 
+![preview](/public/assets/preview.png)
+
 ## Table of Contents
 - [Features](#features)
 - [Installation](#installation)
